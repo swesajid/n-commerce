@@ -30,12 +30,18 @@ export default function SignInSide() {
     event.preventDefault();
     setLoading(true);
     const response = await tryLogin(username, password, router, redirectTo);
+
+    console.log("response", response);
+
     if (response) {
-      if (response !== "fail") {
+      if (response) {
         setErrorText(response);
+        // window.location.reload();
+        router.push("/");
       } else {
         setErrorText("Something went wrong! Please try again");
       }
+
       setUsername("");
       setPassword("");
       setLoading(false);

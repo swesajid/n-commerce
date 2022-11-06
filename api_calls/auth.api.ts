@@ -24,10 +24,10 @@ export const tryLogin = async (
     });
     const data = await res.json();
     if (data.token) {
-      //   console.log("reached");
+      //console.log("reached");
       localStorage.setItem("skon-auth-token", data.token);
       AnalyticsTrackingEvent("Login", username, data.email, data.name);
-      router.push(redirectUrl);
+      return true;
     } else {
       return data.errors[0].msg;
     }
