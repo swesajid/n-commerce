@@ -1,13 +1,9 @@
 /** @format */
 
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import PublicRoute from "../../components/auth/PublicRoute";
 import {
@@ -17,7 +13,6 @@ import {
   FormControlLabel,
   RadioGroup,
 } from "@mui/material";
-import Radio from "@mui/material/Radio";
 import { useRouter } from "next/router";
 import { Form, Formik } from "formik";
 import TextInput from "../../components/form/TextInput";
@@ -31,17 +26,19 @@ import { alertContext } from "../../contexts/alert.context";
 import { timedAlert } from "../../components/utils/alert.util";
 import Head from "next/head";
 import { AnalyticsUserRegister } from "../../analytics/analytics.useradd";
+import { useNavigate } from "react-router-dom";
 
 const NAMESPACE = "Register page";
 
 export default function SignInSide() {
   const router = useRouter();
   const alertState = useContext(alertContext);
+
   const handleSubmit = async (data: iRegister) => {
     const result = await tryRegister(data);
-
     if (result === "success") {
       AnalyticsUserRegister(data.email, data.username, data.name);
+      // window.location.reload();
       router.push("/");
     } else {
       timedAlert(alertState, "Could not sign you up", "error");
@@ -109,25 +106,25 @@ export default function SignInSide() {
                       autoFocus
                       formProps={formProps}
                     />
-                    <RadioGroup
+                    {/* <RadioGroup
                       row
                       aria-labelledby='role'
                       name='role'
                       onChange={(e) => {
                         formProps.setFieldValue("role", e.target.value);
                       }}>
-                      {/* <FormControlLabel
-                                                value="coach"
-                                                control={<Radio />}
-                                                label="I am a coach"
-                                                checked={formProps.values.role === 'coach'}
-                                            />
-                                            <FormControlLabel
-                                                value="club"
-                                                control={<Radio />}
-                                                label="I am a club/school member"
-                                            /> */}
-                    </RadioGroup>
+                      <FormControlLabel
+                        value='coach'
+                        control={<Radio />}
+                        label='I am a coach'
+                        checked={formProps.values.role === "coach"}
+                      />
+                      <FormControlLabel
+                        value='club'
+                        control={<Radio />}
+                        label='I am a club/school member'
+                      />
+                    </RadioGroup> */}
 
                     <Button
                       type='submit'

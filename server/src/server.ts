@@ -6,8 +6,6 @@ import path from "path";
 import { config as dotenv } from "dotenv";
 import { connectDB } from "./config/db.config";
 import logger from "./config/logger";
-import fileUpload from "express-fileupload";
-import fs from "fs/promises";
 import cors from "cors";
 
 const NAMESPACE = "Server";
@@ -20,6 +18,8 @@ const PORT = process.env.PORT;
 
 const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
+const request = require("request-promise-native");
+const app = express();
 
 // Routers
 import authRouter from "./routers/auth.router";
