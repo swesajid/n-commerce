@@ -30,7 +30,9 @@ export const getUserInfo = async (req: Request, res: Response) => {
 
 // Register User
 export const createUser = async (req: Request, res: Response) => {
-  const { name, email, password, role } = req.body;
+
+  // console.log(" req.body" ,  req.body);
+  const { name, email, password, role } = req.body;  
   const username = req.body.username ? req.body.username : email;
 
   try {

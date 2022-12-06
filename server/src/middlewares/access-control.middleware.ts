@@ -63,7 +63,7 @@ export const clubOnly = async (
   try {
     const user: iApiUser = req.body.api_user;
     const role: USER_ROLE = user.role;
-    if (role !== "member") {
+    if (role !== "customer") {
       return res.status(401).send(formatError("Access denied"));
     }
     next();

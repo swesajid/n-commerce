@@ -5,6 +5,7 @@ import { iApiUser } from '../interfaces/auth.interface';
 import User from '../models/User.model';
 import { formatError } from '../utils/error.util';
 import * as bcrypt from 'bcryptjs'
+import { UserTableFormateObj , dataFormate } from '../common/data-formate'
 
 const NAMESPACE = 'User Controller';
 
@@ -27,7 +28,9 @@ export const getSingleUser = async (req: Request, res: Response) => {
             return res.status(404).json(formatError('User not found'));
         }
 
-        res.json(userFound);
+        let data = dataFormate( UserTableFormateObj , userFound , false)
+
+        res.json(data);
     } catch (err: any) {
         logger.error(NAMESPACE, 'Error getting user');
         return res.status(500).json(formatError('Server error'));

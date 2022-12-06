@@ -14,11 +14,11 @@ export const loginValidSchema = [
 ];
 
 export const signupValidSchema = [
-    body('name', 'First name is required').isString(),
-    body('email', 'Email is required').isEmail(),
-    body('role', 'Role is required').isString(),
+    body('name', 'First name is required').isString().optional(),
+    body('email', 'Email is required').isEmail().optional(),
+    body('role', 'Role is required').isString().optional(),
     body('username').isString().optional(),
-    body('password', 'Password must be at least 6 characters').isLength({ min: 5 }),
+    body('password', 'Password must be at least 6 characters').isLength({ min: 5 }).optional(),
 ];
 
 export const forgotPasswordValidSchema = [body('email').isEmail()];
